@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+
 import api from '../../services/api'
 import './styles.css';
 
@@ -31,6 +33,11 @@ export default class main extends Component{
         this.loadSocialProjects(pageNumber);
     };
 
+    deleteProject = async (id,page) =>{
+        await api.delete(`/projects/${id}`);
+        this.loadSocialProjects(page)
+    }
+
     render(){
         const { projects,page,projectInfo } = this.state;
         return (
@@ -39,8 +46,10 @@ export default class main extends Component{
                 <article key={project._id}>
                 <strong>{project.name}</strong>
                 <p>{project.address}</p>
-                <a href = ''>Acessar</a>
+                <Link to = {`/projects/${project._id}`}>Acessar</Link>
+                <button onClick={() =>this.deleteProject(project._id,page)}>Delete</button>
                 </article>
+
                 ))}
             
             <div className='actions'>
