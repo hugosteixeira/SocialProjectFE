@@ -33,6 +33,7 @@ export default class main extends Component{
         this.loadSocialProjects(pageNumber);
     };
 
+
     deleteProject = async (id,page) =>{
         await api.delete(`/projects/${id}`);
         this.loadSocialProjects(page)
@@ -48,6 +49,7 @@ export default class main extends Component{
                 <p>{project.address}</p>
                 <Link to = {`/projects/${project._id}`}>Acessar</Link>
                 <button onClick={() =>this.deleteProject(project._id,page)}>Delete</button>
+                <Link to = {'/projects/editproject/'+project._id}> Edit</Link>
                 </article>
 
                 ))}

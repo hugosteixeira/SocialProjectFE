@@ -5,6 +5,7 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import Main from './pages/main'
 import Project from './pages/Project'
 import NewProject from './pages/newProject'
+import EditProject from './pages/editProject'
 
 const routes = () => (
     <BrowserRouter>

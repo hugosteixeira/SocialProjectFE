@@ -8,15 +8,22 @@ export default class newProject extends Component{
         name:'',
         address:'',
         number: '',
+        id :'',
+    }
+    componentDidMount(){
+        this.setState({id : this.props.match.params.id});
+        this.loadData();
+        console.log(this.props.match.params.id)
+        console.log(this.state.id)
     }
     handleSubmit = async () => {
-        console.log(this.state);
+        this.setState({id : this.props.match.params});
         let req = {
             name : this.state.name,
             address : this.state.address,
             number  : this.state.number,
         }
-        const response = await api.post(`/projects`,req).then(function(){ window.location='/'})
+        const response = await api.put(`/projects/${this.state.id}`,req).then(function(){ window.location='/'})
     }
 
     handleChangeName = (event)=> {
@@ -28,6 +35,12 @@ export default class newProject extends Component{
     handleChangeNumber = (event)=> {
         this.setState({number: event.target.value});
     }
+
+     loadData = async ()=>  {
+        const response = await api.get(`/projects/${this.state.id}`);
+        this.setState({ name: response.data.name, address: response.data.address, number: response.data.number });
+    }
+
     render(){
 
         return (
