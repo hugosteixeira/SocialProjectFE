@@ -21,7 +21,7 @@ export default class main extends Component{
 
     }
     prevPage = () =>{
-        const{page,projectInfo} = this.state;
+        const{page} = this.state;
         if(page === 1) return;
         const pageNumber = page-1;
         this.loadSocialProjects(pageNumber);
@@ -54,6 +54,7 @@ export default class main extends Component{
             
             <div className='actions'>
                 <button disabled={page===1} onClick={this.prevPage}>Anterior</button>
+                <Link to = '/projects/newproject'> <button>New Project</button></Link>
                 <button disabled={projectInfo.pages===page} onClick={this.nextPage}>Proxima</button>
             </div>
             </div>
